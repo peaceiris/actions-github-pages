@@ -24,7 +24,7 @@ afterEach(() => {
   delete process.env['INPUT_TAG_OVERWRITE'];
 });
 
-describe('Integration testing run()', () => {
+describe('getInputs()', () => {
   test('get default inputs', () => {
     process.env['INPUT_DEPLOY_KEY'] = 'test_deploy_key';
     // process.env['INPUT_GITHUB_TOKEN'] = 'test_github_token';
