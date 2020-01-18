@@ -6,7 +6,7 @@ export async function run(): Promise<void> {
   try {
     const inps: Inputs = getInputs();
 
-    core.debug(`Inputs: ${inps}`);
+    core.debug(`PublishBranch: ${inps.PublishBranch}`);
   } catch (e) {
     core.setFailed(`Action failed with error ${e}`);
     return e;
