@@ -6,7 +6,7 @@ export async function run(): Promise<void> {
   try {
     const inps: Inputs = getInputs();
 
-    core.info(`Inputs: ${inps}`);
+    core.debug(`Inputs: ${inps}`);
   } catch (e) {
     core.setFailed(`Action failed with error ${e}`);
     return e;
