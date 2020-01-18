@@ -23,7 +23,9 @@ afterEach(() => {
 });
 
 describe('Integration testing run()', () => {
-  test('succeed in pushing to a remote repository', async () => {
+  test('succeed in pushing using deploy key', async () => {
+    process.env['INPUT_DEPLOY_KEY'] = 'test_deploy_key';
+    process.env['GITHUB_REPOSITORY'] = 'owner/repo';
     const exitcode = await run();
     expect(exitcode).toBe(0);
   });
