@@ -1,0 +1,61 @@
+name: 'GitHub Pages action'
+description: 'GitHub Actions for GitHub Pages 🚀 Deploy static files and publish your site easily. Static-Site-Generators-friendly.'
+author: 'peaceiris'
+runs:
+  using: 'node12'
+  main: 'lib/index.js'
+branding:
+  icon: 'upload-cloud'
+  color: 'blue'
+inputs:
+  deploy_key:
+    description: ''
+    required: false
+  github_token:
+    description: ''
+    required: false
+  personal_token:
+    description: ''
+    required: false
+  publish_branch:
+    description: ''
+    required: false
+    default: 'gh-pages'
+  publish_dir:
+    description: ''
+    required: false
+    default: 'public'
+  external_repository:
+    description: ''
+    required: false
+  allow_empty_commit:
+    description: 'If empty commits should be made to the publication branch'
+    required: false
+    default: false
+  keep_files:
+    description: 'If existing files in the publish branch should be not removed before deploying'
+    required: false
+    default: false
+  force_orphan:
+    description: 'Keep only the latest commit on a GitHub Pages branch'
+    required: false
+    default: false
+  user_name:
+    description: 'Set Git user.name'
+    required: false
+  user_email:
+    description: 'Set Git user.email'
+    required: false
+  commit_message:
+    description: 'Set custom commit message'
+    required: false
+  tag_name:
+    description: 'Set tag name'
+    required: false
+  tag_message:
+    description: 'Set tag message'
+    required: false
+  tag_overwrite:
+    description: 'Enable overwriting tag'
+    required: false
+    default: false
