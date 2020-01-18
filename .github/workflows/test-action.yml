@@ -4,14 +4,6 @@ on:
   push:
     branches:
       - master
-    paths-ignore:
-      - '**.md'
-  pull_request:
-    types:
-      - opened
-      - synchronize
-    paths-ignore:
-      - '**.md'
 
 jobs:
   skipci:
@@ -44,7 +36,17 @@ jobs:
       - run: npm ci
       - run: npm run build
 
+      - name: Setup mdBook
+        uses: peaceiris/actions-mdbook@v1
+        with:
+          mdbook-version: '0.3.5'
+
+      - name: Build
+        working-directory: ./test_projects/mdbook
+        run: mdbook build
+
       - name: Deploy
         uses: ./
         with:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          publish_dir: ./test_projects/mdbook/book
