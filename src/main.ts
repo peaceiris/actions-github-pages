@@ -7,7 +7,7 @@ export async function run(): Promise<number> {
   try {
     const inps: Inputs = getInputs();
 
-    const remoteURL = setTokens(inps);
+    const remoteURL = await setTokens(inps);
     core.debug(`remoteURL: ${remoteURL}`); // TODO: remove
 
     return 0;

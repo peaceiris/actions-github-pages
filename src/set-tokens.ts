@@ -14,7 +14,7 @@ export function setPublishRepo(insp: Inputs): string {
   return `${github.context.repo}`;
 }
 
-export function setTokens(inps: Inputs): string {
+export async function setTokens(inps: Inputs): Promise<string> {
   const publishRepo = setPublishRepo(inps);
   let remoteURL = '';
 
@@ -25,7 +25,6 @@ export function setTokens(inps: Inputs): string {
     io.mkdirP(sshDir);
 
     const knownHosts = path.join(`${sshDir}`, 'known_hosts');
-    // exec.exec('ssh-keyscan', ['-t', 'rsa', 'github.com', '>', `${knownHosts}`]);
     cp.exec(
       `ssh-keyscan -t rsa github.com > ${knownHosts}`,
       (error, stdout, stderr) => {
