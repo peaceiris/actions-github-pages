@@ -4,6 +4,7 @@ import * as github from '@actions/github';
 import * as io from '@actions/io';
 import path from 'path';
 import fs from 'fs';
+import cp from 'child_process';
 import {Inputs} from './interfaces';
 
 export function setPublishRepo(insp: Inputs): string {
@@ -24,7 +25,17 @@ export function setTokens(inps: Inputs): string {
     io.mkdirP(sshDir);
 
     const knownHosts = path.join(`${sshDir}`, 'known_hosts');
-    exec.exec('ssh-keyscan', ['-t', 'rsa', 'github.com', '>', `${knownHosts}`]);
+    // exec.exec('ssh-keyscan', ['-t', 'rsa', 'github.com', '>', `${knownHosts}`]);
+    cp.exec(
+      `ssh-keyscan -t rsa github.com > ${knownHosts}`,
+      (error, stdout, stderr) => {
+        if (error) {
+          throw new Error(`exec error: ${error}`);
+        }
+        core.debug(`stdout: ${stdout}`);
+        core.debug(`stderr: ${stderr}`);
+      }
+    );
 
     const idRSA = path.join(`${sshDir}`, 'id_rsa');
     fs.writeFile(idRSA, inps.DeployKey, err => {
