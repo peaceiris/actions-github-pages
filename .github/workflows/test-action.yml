@@ -1,0 +1,22 @@
+name: Daily Test
+
+on:
+  push:
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - 'ubuntu-18.04'
+          # - 'macos-latest'
+          # - 'windows-latest'
+    steps:
+
+      - uses: actions/checkout@v2
+
+      - name: Deploy
+        uses: ./
+        with:
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
