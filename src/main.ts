@@ -1,9 +1,10 @@
 import * as core from '@actions/core';
+import * as exec from '@actions/exec';
 import path from 'path';
 import {Inputs} from './interfaces';
 import {getInputs} from './get-inputs';
 import {setTokens} from './set-tokens';
-import {setGitRepo} from './git-utils';
+import * as git from './git-utils';
 
 export function getHomeDir(): string {
   let homedir = '';
@@ -27,7 +28,17 @@ export async function run(): Promise<number> {
     core.info(`remoteURL: ${remoteURL}`); // TODO: remove
 
     const workDir = path.join(getHomeDir(), 'actions_github_pages');
-    await setGitRepo(inps, workDir, remoteURL);
+    await git.setRepo(inps, workDir, remoteURL);
+
+    await git.setConfig(inps);
+
+    exec.exec('git', ['remote', 'set-url', 'origin', `${remoteURL}`]);
+    exec.exec('git', ['add', '--all']);
+
+    await git.commit();
+    await git.push(inps.PublishBranch);
+
+    core.info('successfully deployed');
 
     return 0;
   } catch (e) {
