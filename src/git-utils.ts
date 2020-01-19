@@ -124,7 +124,33 @@ export async function commit(): Promise<void> {
   // TODO: inps.ExternalRepository
   // TODO: inps.AllowEmptyCommit
 
-  await exec.exec('git', ['commit', '-m', `deploy: ${process.env.GITHUB_SHA}`]);
+  const result: CmdResult = {
+    exitcode: 0,
+    output: ''
+  };
+  const options = {
+    listeners: {
+      stdout: (data: Buffer): void => {
+        result.output += data.toString();
+      }
+    }
+  };
+
+  try {
+    result.exitcode = await exec.exec(
+      'git',
+      ['commit', '-m', `deploy: ${process.env.GITHUB_SHA}`],
+      options
+    );
+    const isContains = result.output.includes(
+      'nothing to commit, working tree clean'
+    );
+    if (isContains) {
+      process.exit(0);
+    }
+  } catch (e) {
+    core.debug(e);
+  }
 }
 
 export async function push(remoteBranch: string): Promise<void> {
