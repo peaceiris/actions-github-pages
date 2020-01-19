@@ -5,20 +5,7 @@ import {Inputs} from './interfaces';
 import {getInputs} from './get-inputs';
 import {setTokens} from './set-tokens';
 import * as git from './git-utils';
-
-export function getHomeDir(): string {
-  let homedir = '';
-
-  if (process.platform === 'win32') {
-    homedir = process.env['USERPROFILE'] || 'C:\\';
-  } else {
-    homedir = `${process.env.HOME}`;
-  }
-
-  core.debug(`homeDir: ${homedir}`);
-
-  return homedir;
-}
+import {getHomeDir} from './utils';
 
 export async function run(): Promise<number> {
   try {
