@@ -4,7 +4,6 @@ import * as github from '@actions/github';
 import * as io from '@actions/io';
 import path from 'path';
 import fs from 'fs';
-import cp from 'child_process';
 import {Inputs} from './interfaces';
 
 export function setPublishRepo(insp: Inputs): string {
@@ -23,6 +22,7 @@ export async function setTokens(inps: Inputs): Promise<string> {
 
     const sshDir = path.join(`${process.env.HOME}`, '.ssh');
     await io.mkdirP(sshDir);
+    await exec.exec('chmod', ['700', `${sshDir}`]);
 
     const knownHosts = path.join(`${sshDir}`, 'known_hosts');
     // ssh-keyscan -t rsa -H github.com >> ~/.ssh/known_hosts
@@ -37,7 +37,7 @@ export async function setTokens(inps: Inputs): Promise<string> {
       }
     });
 
-    const idRSA = path.join(`${sshDir}`, 'github');
+    const idRSA = path.join(`${sshDir}`, 'actions-github-pages');
     fs.writeFile(idRSA, inps.DeployKey, err => {
       if (err) {
         throw err;
@@ -49,9 +49,9 @@ export async function setTokens(inps: Inputs): Promise<string> {
 
     const sshConfigPath = path.join(`${sshDir}`, 'config');
     const sshConfigContent = `\
-Host github
+Host actions-github-pages
   HostName github.com
-  IdentityFile ~/.ssh/github
+  IdentityFile ~/.ssh/actions-github-pages
   User git
 `;
     fs.writeFile(sshConfigPath, sshConfigContent, err => {
@@ -68,7 +68,7 @@ Host github
     await exec.exec('cat', [`${knownHosts}`]);
     await exec.exec('cat', [`${sshConfigPath}`]);
 
-    remoteURL = `git@github.com:${publishRepo}.git`;
+    remoteURL = `git@actions-github-pages:${publishRepo}.git`;
     return remoteURL;
   } else if (inps.GithubToken) {
     core.info('setup GITHUB_TOKEN');
