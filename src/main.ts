@@ -32,7 +32,7 @@ export async function run(): Promise<number> {
 
     await git.setConfig(inps);
 
-    exec.exec('git', ['remote', 'set-url', 'origin', `${remoteURL}`]);
+    exec.exec('git', ['remote', 'add', 'origin', `${remoteURL}`]);
     exec.exec('git', ['add', '--all']);
 
     await git.commit();
