@@ -31,15 +31,15 @@ inputs:
   allow_empty_commit:
     description: 'If empty commits should be made to the publication branch'
     required: false
-    default: false
+    default: 'false'
   keep_files:
     description: 'If existing files in the publish branch should be not removed before deploying'
     required: false
-    default: false
+    default: 'false'
   force_orphan:
     description: 'Keep only the latest commit on a GitHub Pages branch'
     required: false
-    default: false
+    default: 'false'
   user_name:
     description: 'Set Git user.name'
     required: false
@@ -58,4 +58,4 @@ inputs:
   tag_overwrite:
     description: 'Enable overwriting tag'
     required: false
-    default: false
+    default: 'false'

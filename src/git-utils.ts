@@ -37,13 +37,17 @@ export async function copyAssets(
 
 export async function setRepo(inps: Inputs, remoteURL: string): Promise<void> {
   const workDir = path.join(getHomeDir(), 'actions_github_pages');
+  const publishDir = path.join(
+    `${process.env.GITHUB_WORKSPACE}`,
+    inps.PublishDir
+  );
 
   if (inps.ForceOrphan) {
     core.info('ForceOrphan: true');
     await createWorkDir(workDir);
     process.chdir(`${workDir}`);
     await createBranchForce(inps.PublishBranch);
-    await copyAssets(inps.PublishDir, workDir);
+    await copyAssets(publishDir, workDir);
     return;
   }
 
@@ -79,7 +83,7 @@ export async function setRepo(inps: Inputs, remoteURL: string): Promise<void> {
       await exec.exec('git', ['rm', '-r', '--ignore-unmatch', '*']);
     }
 
-    await copyAssets(inps.PublishDir, workDir);
+    await copyAssets(publishDir, workDir);
     process.chdir(`${workDir}`);
     return;
   } else {
@@ -87,7 +91,7 @@ export async function setRepo(inps: Inputs, remoteURL: string): Promise<void> {
     await createWorkDir(workDir);
     process.chdir(`${workDir}`);
     await createBranchForce(inps.PublishBranch);
-    await copyAssets(inps.PublishDir, workDir);
+    await copyAssets(publishDir, workDir);
     return;
   }
 }
