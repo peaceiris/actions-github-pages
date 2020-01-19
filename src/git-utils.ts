@@ -29,7 +29,7 @@ export async function copyAssets(
       continue;
     }
     await io.cp(file, `${workDir}/`, copyOpts);
-    core.info(`copy ${file}`);
+    core.info(`[INFO] copy ${file}`);
   }
 
   return;
@@ -43,7 +43,7 @@ export async function setRepo(inps: Inputs, remoteURL: string): Promise<void> {
   );
 
   if (inps.ForceOrphan) {
-    core.info('ForceOrphan: true');
+    core.info('[INFO] ForceOrphan: true');
     await createWorkDir(workDir);
     process.chdir(`${workDir}`);
     await createBranchForce(inps.PublishBranch);
@@ -78,7 +78,7 @@ export async function setRepo(inps: Inputs, remoteURL: string): Promise<void> {
 
   if (result.exitcode === 0) {
     if (inps.KeepFiles) {
-      core.info('Keep existing files');
+      core.info('[INFO] Keep existing files');
     } else {
       await exec.exec('git', ['rm', '-r', '--ignore-unmatch', '*']);
     }
@@ -87,7 +87,9 @@ export async function setRepo(inps: Inputs, remoteURL: string): Promise<void> {
     process.chdir(`${workDir}`);
     return;
   } else {
-    core.info(`first deployment, create new branch ${inps.PublishBranch}`);
+    core.info(
+      `[INFO] first deployment, create new branch ${inps.PublishBranch}`
+    );
     await createWorkDir(workDir);
     process.chdir(`${workDir}`);
     await createBranchForce(inps.PublishBranch);
@@ -142,11 +144,10 @@ export async function commit(): Promise<void> {
       ['commit', '-m', `deploy: ${process.env.GITHUB_SHA}`],
       options
     );
-    const isContains = result.output.includes(
-      'nothing to commit, working tree clean'
-    );
+    const nothingToCommit = 'nothing to commit, working tree clean';
+    const isContains = result.output.includes(nothingToCommit);
     if (isContains) {
-      process.exit(0);
+      core.info('[INFO] skip commit');
     }
   } catch (e) {
     core.debug(e);
