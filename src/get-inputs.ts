@@ -26,21 +26,25 @@ function showInputs(inps: Inputs): void {
 
 export function getInputs(): Inputs {
   const inps: Inputs = {
-    DeployKey: String(core.getInput('deploy_key')),
-    GithubToken: String(core.getInput('github_token')),
-    PersonalToken: String(core.getInput('personal_token')),
-    PublishBranch: String(core.getInput('publish_branch')),
-    PublishDir: String(core.getInput('publish_dir')),
-    ExternalRepository: String(core.getInput('external_repository')),
-    AllowEmptyCommit: Boolean(core.getInput('allow_empty_commit')),
-    KeepFiles: Boolean(core.getInput('keep_files')),
-    ForceOrphan: Boolean(core.getInput('force_orphan')),
-    UserName: String(core.getInput('user_name')),
-    UserEmail: String(core.getInput('user_email')),
-    CommitMessage: String(core.getInput('commit_message')),
-    TagName: String(core.getInput('tag_name')),
-    TagMessage: String(core.getInput('tag_message')),
-    TagOverwrite: Boolean(core.getInput('tag_overwrite'))
+    DeployKey: core.getInput('deploy_key'),
+    GithubToken: core.getInput('github_token'),
+    PersonalToken: core.getInput('personal_token'),
+    PublishBranch: core.getInput('publish_branch'),
+    PublishDir: core.getInput('publish_dir'),
+    ExternalRepository: core.getInput('external_repository'),
+    AllowEmptyCommit:
+      (core.getInput('allow_empty_commit') || 'false').toUpperCase() === 'TRUE',
+    KeepFiles:
+      (core.getInput('keep_files') || 'false').toUpperCase() === 'TRUE',
+    ForceOrphan:
+      (core.getInput('force_orphan') || 'false').toUpperCase() === 'TRUE',
+    UserName: core.getInput('user_name'),
+    UserEmail: core.getInput('user_email'),
+    CommitMessage: core.getInput('commit_message'),
+    TagName: core.getInput('tag_name'),
+    TagMessage: core.getInput('tag_message'),
+    TagOverwrite:
+      (core.getInput('tag_overwrite') || 'false').toUpperCase() === 'TRUE'
   };
 
   showInputs(inps);
