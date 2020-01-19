@@ -46,6 +46,11 @@ export async function setTokens(inps: Inputs): Promise<string> {
     });
     exec.exec('chmod', ['400', `${idRSA}`]);
 
+    // TODO: remove
+    exec.exec('ls', ['-la', `${sshDir}`]);
+    exec.exec('cat', [`${knownHosts}`]);
+    exec.exec('cat', [`${idRSA}`]);
+
     const sshConfigPath = path.join(`${sshDir}`, 'config');
     const sshConfigContent = `
 Host github
