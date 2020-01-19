@@ -10,7 +10,7 @@ export async function run(): Promise<number> {
     const inps: Inputs = getInputs();
 
     const remoteURL = await setTokens(inps);
-    core.info(`remoteURL: ${remoteURL}`); // TODO: remove
+    core.info(`[INFO] remoteURL: ${remoteURL}`); // TODO: remove
 
     await git.setRepo(inps, remoteURL);
 
@@ -23,7 +23,7 @@ export async function run(): Promise<number> {
     await git.commit();
     await git.push(inps.PublishBranch);
 
-    core.info('successfully deployed');
+    core.info('[INFO] successfully deployed');
 
     return 0;
   } catch (e) {

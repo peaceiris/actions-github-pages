@@ -18,7 +18,7 @@ export async function setTokens(inps: Inputs): Promise<string> {
   let remoteURL = '';
 
   if (inps.DeployKey) {
-    core.info('setup SSH deploy key');
+    core.info('[INFO] setup SSH deploy key');
 
     const sshDir = path.join(`${process.env.HOME}`, '.ssh');
     await io.mkdirP(sshDir);
@@ -33,7 +33,7 @@ github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXY
       if (err) {
         throw err;
       } else {
-        core.info(`wrote ${knownHosts}`);
+        core.info(`[INFO] wrote ${knownHosts}`);
       }
     });
 
@@ -42,7 +42,7 @@ github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXY
       if (err) {
         throw err;
       } else {
-        core.info(`wrote ${idRSA}`);
+        core.info(`[INFO] wrote ${idRSA}`);
       }
     });
     await exec.exec('chmod', ['400', `${idRSA}`]);
@@ -58,7 +58,7 @@ Host github
       if (err) {
         throw err;
       } else {
-        core.info(`wrote ${sshConfigPath}`);
+        core.info(`[INFO] wrote ${sshConfigPath}`);
       }
     });
     await exec.exec('chmod', ['400', `${sshConfigPath}`]);
@@ -66,7 +66,7 @@ Host github
     remoteURL = `git@github.com:${publishRepo}.git`;
     return remoteURL;
   } else if (inps.GithubToken) {
-    core.info('setup GITHUB_TOKEN');
+    core.info('[INFO] setup GITHUB_TOKEN');
     core.warning(
       'GITHUB_TOKEN does not support to trigger the GitHub Pages build event on a public repository.'
     );
@@ -78,7 +78,7 @@ Host github
     remoteURL = `https://x-access-token:${inps.GithubToken}@github.com/${publishRepo}.git`;
     return remoteURL;
   } else if (inps.PersonalToken) {
-    core.info('setup personal access token');
+    core.info('[INFO] setup personal access token');
     remoteURL = `https://x-access-token:${inps.PersonalToken}@github.com/${publishRepo}.git`;
     return remoteURL;
   } else {

@@ -3,25 +3,25 @@ import {Inputs} from './interfaces';
 
 function showInputs(inps: Inputs): void {
   if (inps.DeployKey) {
-    core.info(`DeployKey: true`);
+    core.info(`[INFO] DeployKey: true`);
   } else if (inps.GithubToken) {
-    core.info(`GithubToken: true`);
+    core.info(`[INFO] GithubToken: true`);
   } else if (inps.PersonalToken) {
-    core.info(`PersonalToken: true`);
+    core.info(`[INFO] PersonalToken: true`);
   }
 
-  core.info(`PublishBranch: ${inps.PublishBranch}`);
-  core.info(`PublishDir: ${inps.PublishDir}`);
-  core.info(`ExternalRepository: ${inps.ExternalRepository}`);
-  core.info(`AllowEmptyCommit: ${inps.AllowEmptyCommit}`);
-  core.info(`KeepFiles: ${inps.KeepFiles}`);
-  core.info(`ForceOrphan: ${inps.ForceOrphan}`);
-  core.info(`UserEmail: ${inps.UserEmail}`);
-  core.info(`UserEmail: ${inps.UserEmail}`);
-  core.info(`CommitMessage: ${inps.CommitMessage}`);
-  core.info(`TagName: ${inps.TagName}`);
-  core.info(`TagMessage: ${inps.TagMessage}`);
-  core.info(`TagOverwrite: ${inps.TagOverwrite}`);
+  core.info(`[INFO] PublishBranch: ${inps.PublishBranch}`);
+  core.info(`[INFO] PublishDir: ${inps.PublishDir}`);
+  core.info(`[INFO] ExternalRepository: ${inps.ExternalRepository}`);
+  core.info(`[INFO] AllowEmptyCommit: ${inps.AllowEmptyCommit}`);
+  core.info(`[INFO] KeepFiles: ${inps.KeepFiles}`);
+  core.info(`[INFO] ForceOrphan: ${inps.ForceOrphan}`);
+  core.info(`[INFO] UserEmail: ${inps.UserEmail}`);
+  core.info(`[INFO] UserEmail: ${inps.UserEmail}`);
+  core.info(`[INFO] CommitMessage: ${inps.CommitMessage}`);
+  core.info(`[INFO] TagName: ${inps.TagName}`);
+  core.info(`[INFO] TagMessage: ${inps.TagMessage}`);
+  core.info(`[INFO] TagOverwrite: ${inps.TagOverwrite}`);
 }
 
 export function getInputs(): Inputs {

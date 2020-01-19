@@ -126,31 +126,15 @@ export async function commit(): Promise<void> {
   // TODO: inps.ExternalRepository
   // TODO: inps.AllowEmptyCommit
 
-  const result: CmdResult = {
-    exitcode: 0,
-    output: ''
-  };
-  const options = {
-    listeners: {
-      stdout: (data: Buffer): void => {
-        result.output += data.toString();
-      }
-    }
-  };
-
   try {
-    result.exitcode = await exec.exec(
-      'git',
-      ['commit', '-m', `deploy: ${process.env.GITHUB_SHA}`],
-      options
-    );
-    const nothingToCommit = 'nothing to commit, working tree clean';
-    const isContains = result.output.includes(nothingToCommit);
-    if (isContains) {
-      core.info('[INFO] skip commit');
-    }
+    await exec.exec('git', [
+      'commit',
+      '-m',
+      `deploy: ${process.env.GITHUB_SHA}`
+    ]);
   } catch (e) {
-    core.debug(e);
+    core.info('[INFO] skip commit');
+    core.debug(`[INFO] skip commit ${e}`);
   }
 }
 
