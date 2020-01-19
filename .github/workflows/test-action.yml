@@ -46,7 +46,7 @@ jobs:
         run: mdbook build
 
       - name: Deploy
-        uses: ./
+        uses: peaceiris/actions-gh-pages@v2
         with:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           publish_dir: ./test_projects/mdbook/book
