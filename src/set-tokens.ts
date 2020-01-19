@@ -63,28 +63,13 @@ Host github
     });
     await exec.exec('chmod', ['400', `${sshConfigPath}`]);
 
-    try {
-      await exec.exec('sh', ['-c', `eval "$(ssh-agent)" && ssh-add ${idRSA}`]);
-      await exec.exec('ssh-add', ['-l']);
-    } catch (e) {
-      core.debug(e);
-    }
-
-    // TODO: remove
-    await exec.exec('ls', ['-la', `${sshDir}`]);
-    await exec.exec('cat', [`${knownHosts}`]);
-    await exec.exec('cat', [`${sshConfigPath}`]);
-
     remoteURL = `git@github.com:${publishRepo}.git`;
     return remoteURL;
   } else if (inps.GithubToken) {
     core.info('setup GITHUB_TOKEN');
-    const isPrivateRepo = `${github.context.payload.event.repository.private}`;
-    if (isPrivateRepo === 'false') {
-      core.warning(
-        'GITHUB_TOKEN does not support to trigger the GitHub Pages build event.'
-      );
-    }
+    core.warning(
+      'GITHUB_TOKEN does not support to trigger the GitHub Pages build event on a public repository.'
+    );
     if (inps.ExternalRepository) {
       core.error(
         'GITHUB_TOKEN does not support to push to an external repository'
