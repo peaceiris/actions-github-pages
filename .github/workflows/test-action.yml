@@ -47,7 +47,6 @@ jobs:
 
       - name: Deploy
         uses: ./
-        shell: bash
         with:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           publish_dir: ./test_projects/mdbook/book
