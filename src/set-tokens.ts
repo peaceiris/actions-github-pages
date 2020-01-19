@@ -47,9 +47,6 @@ export async function setTokens(inps: Inputs): Promise<string> {
     });
     await exec.exec('chmod', ['400', `${idRSA}`]);
 
-    await exec.exec('sh', ['-c', `eval "$(ssh-agent)" && ssh-add ${idRSA}`]);
-    await exec.exec('ssh-add', ['-l']);
-
     const sshConfigPath = path.join(`${sshDir}`, 'config');
     const sshConfigContent = `\
 Host actions-github-pages
@@ -66,6 +63,9 @@ Host actions-github-pages
       }
     });
     await exec.exec('chmod', ['400', `${sshConfigPath}`]);
+
+    await exec.exec('sh', ['-c', `eval "$(ssh-agent)" && ssh-add ${idRSA}`]);
+    await exec.exec('ssh-add', ['-l']);
 
     // TODO: remove
     await exec.exec('ls', ['-la', `${sshDir}`]);
