@@ -63,7 +63,11 @@ Host github
     });
     await exec.exec('chmod', ['400', `${sshConfigPath}`]);
 
-    await exec.exec('sh', ['-c', `eval "$(ssh-agent)" && ssh-add ${idRSA}`]);
+    try {
+      await exec.exec('sh', ['-c', `eval "$(ssh-agent)" && ssh-add ${idRSA}`]);
+    } catch (e) {
+      core.debug(e);
+    }
     await exec.exec('ssh-add', ['-l']);
 
     // TODO: remove
