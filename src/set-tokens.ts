@@ -68,7 +68,7 @@ Host actions-github-pages
     await exec.exec('cat', [`${knownHosts}`]);
     await exec.exec('cat', [`${sshConfigPath}`]);
 
-    remoteURL = `git@actions-github-pages:${publishRepo}.git`;
+    remoteURL = `git@github.com:${publishRepo}.git`;
     return remoteURL;
   } else if (inps.GithubToken) {
     core.info('setup GITHUB_TOKEN');
