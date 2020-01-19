@@ -25,16 +25,21 @@ export async function setTokens(inps: Inputs): Promise<string> {
     io.mkdirP(sshDir);
 
     const knownHosts = path.join(`${sshDir}`, 'known_hosts');
-    cp.exec(
-      `ssh-keyscan -t rsa github.com > ${knownHosts}`,
-      (error, stdout, stderr) => {
-        if (error) {
-          throw new Error(`exec error: ${error}`);
-        }
-        core.debug(`stdout: ${stdout}`);
-        core.debug(`stderr: ${stderr}`);
+    const cmdSSHkeyscan = 'ssh-keyscan -t rsa github.com';
+    cp.exec(cmdSSHkeyscan, (error, stdout, stderr) => {
+      if (error) {
+        throw new Error(`exec error: ${error}`);
       }
-    );
+      fs.writeFile(knownHosts, stdout, err => {
+        if (err) {
+          throw err;
+        } else {
+          core.info(`wrote ${knownHosts}`);
+        }
+      });
+      core.debug(`stdout: ${stdout}`);
+      core.debug(`stderr: ${stderr}`);
+    });
 
     const idRSA = path.join(`${sshDir}`, 'github');
     fs.writeFile(idRSA, inps.DeployKey, err => {
@@ -45,11 +50,6 @@ export async function setTokens(inps: Inputs): Promise<string> {
       }
     });
     exec.exec('chmod', ['400', `${idRSA}`]);
-
-    // TODO: remove
-    exec.exec('ls', ['-la', `${sshDir}`]);
-    exec.exec('cat', [`${knownHosts}`]);
-    exec.exec('cat', [`${idRSA}`]);
 
     const sshConfigPath = path.join(`${sshDir}`, 'config');
     const sshConfigContent = `
@@ -66,6 +66,11 @@ Host github
       }
     });
     exec.exec('chmod', ['400', `${sshConfigPath}`]);
+
+    // TODO: remove
+    exec.exec('ls', ['-la', `${sshDir}`]);
+    exec.exec('cat', [`${knownHosts}`]);
+    exec.exec('cat', [`${sshConfigPath}`]);
 
     remoteURL = `git@github.com:${publishRepo}.git`;
     return remoteURL;
