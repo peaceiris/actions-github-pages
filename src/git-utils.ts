@@ -13,12 +13,7 @@ export async function createWorkDir(workDirName: string): Promise<string> {
   return workDir;
 }
 
-export async function createBranchForce(
-  workDir: string,
-  branch: string
-): Promise<void> {
-  await createWorkDir(workDir);
-  process.chdir(`${workDir}`);
+export async function createBranchForce(branch: string): Promise<void> {
   await exec.exec('git', ['init']);
   await exec.exec('git', ['checkout', '--orphan', `${branch}`]);
   return;
@@ -41,14 +36,14 @@ export async function copyAssets(
   return;
 }
 
-export async function setRepo(
-  inps: Inputs,
-  workDir: string,
-  remoteURL: string
-): Promise<void> {
+export async function setRepo(inps: Inputs, remoteURL: string): Promise<void> {
+  const workDir = path.join(getHomeDir(), 'actions_github_pages');
+
   if (inps.ForceOrphan) {
     core.info('ForceOrphan: true');
-    await createBranchForce(workDir, inps.PublishBranch);
+    await createWorkDir(workDir);
+    process.chdir(`${workDir}`);
+    await createBranchForce(inps.PublishBranch);
     await copyAssets(inps.PublishDir, workDir);
     return;
   }
@@ -90,7 +85,9 @@ export async function setRepo(
     return;
   } else {
     core.info(`first deployment, create new branch ${inps.PublishBranch}`);
-    await createBranchForce(inps.PublishDir, inps.PublishBranch);
+    await createWorkDir(workDir);
+    process.chdir(`${workDir}`);
+    await createBranchForce(inps.PublishBranch);
     await copyAssets(inps.PublishDir, workDir);
     return;
   }

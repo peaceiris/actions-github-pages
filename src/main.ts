@@ -1,11 +1,9 @@
 import * as core from '@actions/core';
 import * as exec from '@actions/exec';
-import path from 'path';
 import {Inputs} from './interfaces';
 import {getInputs} from './get-inputs';
 import {setTokens} from './set-tokens';
 import * as git from './git-utils';
-import {getHomeDir} from './utils';
 
 export async function run(): Promise<number> {
   try {
@@ -14,8 +12,7 @@ export async function run(): Promise<number> {
     const remoteURL = await setTokens(inps);
     core.info(`remoteURL: ${remoteURL}`); // TODO: remove
 
-    const workDir = path.join(getHomeDir(), 'actions_github_pages');
-    await git.setRepo(inps, workDir, remoteURL);
+    await git.setRepo(inps, remoteURL);
 
     await git.setConfig(inps);
 
