@@ -53,7 +53,6 @@ Host github
   HostName github.com
   IdentityFile ~/.ssh/id_rsa
   User git
-  ForwardAgent yes
 `;
     fs.writeFile(sshConfigPath, sshConfigContent, err => {
       if (err) {
