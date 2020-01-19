@@ -36,15 +36,31 @@ export async function setTokens(inps: Inputs): Promise<string> {
       }
     );
 
-    const idRSA = path.join(`${sshDir}`, 'id_rsa');
+    const idRSA = path.join(`${sshDir}`, 'github');
     fs.writeFile(idRSA, inps.DeployKey, err => {
       if (err) {
         throw err;
       } else {
-        core.info('wrote ~/.ssh/id_rsa');
+        core.info(`wrote ${idRSA}`);
       }
     });
     exec.exec('chmod', ['400', `${idRSA}`]);
+
+    const sshConfigPath = path.join(`${sshDir}`, 'config');
+    const sshConfigContent = `
+Host github
+  HostName github.com
+  IdentityFile ~/.ssh/github
+  User git
+`;
+    fs.writeFile(sshConfigPath, sshConfigContent, err => {
+      if (err) {
+        throw err;
+      } else {
+        core.info(`wrote ${sshConfigPath}`);
+      }
+    });
+    exec.exec('chmod', ['400', `${sshConfigPath}`]);
 
     remoteURL = `git@github.com:${publishRepo}.git`;
     return remoteURL;
