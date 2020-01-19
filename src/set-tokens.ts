@@ -11,7 +11,7 @@ export function setPublishRepo(insp: Inputs): string {
   if (insp.ExternalRepository) {
     return insp.ExternalRepository;
   }
-  return `${github.context.repo}`;
+  return `${github.context.repo.owner}/${github.context.repo.repo}`;
 }
 
 export async function setTokens(inps: Inputs): Promise<string> {
