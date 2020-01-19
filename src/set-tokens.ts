@@ -26,19 +26,21 @@ export async function setTokens(inps: Inputs): Promise<string> {
 
     const knownHosts = path.join(`${sshDir}`, 'known_hosts');
     const cmdSSHkeyscan = 'ssh-keyscan -t rsa github.com';
+    let cmdSSHkeyscanOutput = '';
     cp.exec(cmdSSHkeyscan, (error, stdout, stderr) => {
       if (error) {
         throw new Error(`exec error: ${error}`);
       }
-      fs.writeFile(knownHosts, stdout, err => {
-        if (err) {
-          throw err;
-        } else {
-          core.info(`wrote ${knownHosts}`);
-        }
-      });
+      cmdSSHkeyscanOutput = stdout;
       core.debug(`stdout: ${stdout}`);
       core.debug(`stderr: ${stderr}`);
+    });
+    fs.writeFile(knownHosts, cmdSSHkeyscanOutput, err => {
+      if (err) {
+        throw err;
+      } else {
+        core.info(`wrote ${knownHosts}`);
+      }
     });
 
     const idRSA = path.join(`${sshDir}`, 'github');
