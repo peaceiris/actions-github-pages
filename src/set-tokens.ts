@@ -46,8 +46,14 @@ export async function setTokens(inps: Inputs): Promise<string> {
       }
     });
     await exec.exec('chmod', ['400', `${idRSA}`]);
-    await exec.exec('sh', ['-c', 'eval `ssh-agent`']);
+
+    if (process.platform === 'win32') {
+      await exec.exec('sh', ['-c', 'eval `ssh-agent`']);
+    } else {
+      await exec.exec('eval', ['`ssh-agent`']);
+    }
     await exec.exec('ssh-add', [`${idRSA}`]);
+    await exec.exec('ssh-add', ['-l']);
 
     const sshConfigPath = path.join(`${sshDir}`, 'config');
     const sshConfigContent = `\
@@ -55,6 +61,7 @@ Host actions-github-pages
   HostName github.com
   IdentityFile ~/.ssh/actions-github-pages
   User git
+  ForwardAgent yes
 `;
     fs.writeFile(sshConfigPath, sshConfigContent, err => {
       if (err) {
