@@ -6,11 +6,10 @@ import path from 'path';
 import {Inputs, CmdResult} from './interfaces';
 import {getHomeDir} from './utils';
 
-export async function createWorkDir(workDirName: string): Promise<string> {
-  const workDir = path.join(getHomeDir(), workDirName);
-  await io.mkdirP(workDir);
-  core.debug(`workDir: ${workDir}`);
-  return workDir;
+export async function createWorkDir(workDirName: string): Promise<void> {
+  await io.mkdirP(workDirName);
+  core.debug(`workDir was created: ${workDirName}`);
+  return;
 }
 
 export async function createBranchForce(branch: string): Promise<void> {
