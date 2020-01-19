@@ -22,7 +22,7 @@ export async function setTokens(inps: Inputs): Promise<string> {
     core.info('setup SSH deploy key');
 
     const sshDir = path.join(`${process.env.HOME}`, '.ssh');
-    io.mkdirP(sshDir);
+    await io.mkdirP(sshDir);
 
     const knownHosts = path.join(`${sshDir}`, 'known_hosts');
     const cmdSSHkeyscan = 'ssh-keyscan -t rsa github.com';
@@ -49,7 +49,7 @@ export async function setTokens(inps: Inputs): Promise<string> {
         core.info(`wrote ${idRSA}`);
       }
     });
-    exec.exec('chmod', ['400', `${idRSA}`]);
+    await exec.exec('chmod', ['400', `${idRSA}`]);
 
     const sshConfigPath = path.join(`${sshDir}`, 'config');
     const sshConfigContent = `
@@ -65,7 +65,7 @@ Host github
         core.info(`wrote ${sshConfigPath}`);
       }
     });
-    exec.exec('chmod', ['400', `${sshConfigPath}`]);
+    await exec.exec('chmod', ['400', `${sshConfigPath}`]);
 
     // TODO: remove
     await exec.exec('ls', ['-la', `${sshDir}`]);
