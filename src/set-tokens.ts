@@ -19,7 +19,7 @@ export async function setTokens(inps: Inputs): Promise<string> {
   let remoteURL = '';
 
   if (inps.DeployKey) {
-    core.debug('setup SSH deploy key');
+    core.info('setup SSH deploy key');
 
     const sshDir = path.join(`${process.env.HOME}`, '.ssh');
     io.mkdirP(sshDir);
@@ -41,7 +41,7 @@ export async function setTokens(inps: Inputs): Promise<string> {
       if (err) {
         throw err;
       } else {
-        core.debug('wrote ~/.ssh/id_rsa');
+        core.info('wrote ~/.ssh/id_rsa');
       }
     });
     exec.exec('chmod', ['400', `${idRSA}`]);
@@ -49,7 +49,7 @@ export async function setTokens(inps: Inputs): Promise<string> {
     remoteURL = `git@github.com:${publishRepo}.git`;
     return remoteURL;
   } else if (inps.GithubToken) {
-    core.debug('setup GITHUB_TOKEN');
+    core.info('setup GITHUB_TOKEN');
     const isPrivateRepo = `${github.context.payload.event.repository.private}`;
     if (isPrivateRepo === 'false') {
       core.warning(
@@ -64,7 +64,7 @@ export async function setTokens(inps: Inputs): Promise<string> {
     remoteURL = `https://x-access-token:${inps.GithubToken}@github.com/${publishRepo}.git`;
     return remoteURL;
   } else if (inps.PersonalToken) {
-    core.debug('setup personal access token');
+    core.info('setup personal access token');
     remoteURL = `https://x-access-token:${inps.PersonalToken}@github.com/${publishRepo}.git`;
     return remoteURL;
   } else {

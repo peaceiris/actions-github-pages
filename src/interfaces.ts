@@ -15,3 +15,8 @@ export interface Inputs {
   TagMessage: string;
   TagOverwrite: boolean;
 }
+
+export interface CmdResult {
+  exitcode: number;
+  output: string;
+}
