@@ -76,6 +76,8 @@ export async function setRepo(inps: Inputs, remoteURL: string): Promise<void> {
     options
   );
 
+  process.chdir(`${workDir}`);
+
   if (result.exitcode === 0) {
     if (inps.KeepFiles) {
       core.info('[INFO] Keep existing files');
@@ -84,14 +86,12 @@ export async function setRepo(inps: Inputs, remoteURL: string): Promise<void> {
     }
 
     await copyAssets(publishDir, workDir);
-    process.chdir(`${workDir}`);
     return;
   } else {
     core.info(
       `[INFO] first deployment, create new branch ${inps.PublishBranch}`
     );
     await createWorkDir(workDir);
-    process.chdir(`${workDir}`);
     await createBranchForce(inps.PublishBranch);
     await copyAssets(publishDir, workDir);
     return;
