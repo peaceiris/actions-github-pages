@@ -65,10 +65,10 @@ Host github
 
     try {
       await exec.exec('sh', ['-c', `eval "$(ssh-agent)" && ssh-add ${idRSA}`]);
+      await exec.exec('ssh-add', ['-l']);
     } catch (e) {
       core.debug(e);
     }
-    await exec.exec('ssh-add', ['-l']);
 
     // TODO: remove
     await exec.exec('ls', ['-la', `${sshDir}`]);
