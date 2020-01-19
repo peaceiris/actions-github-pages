@@ -68,9 +68,9 @@ Host github
     exec.exec('chmod', ['400', `${sshConfigPath}`]);
 
     // TODO: remove
-    exec.exec('ls', ['-la', `${sshDir}`]);
-    exec.exec('cat', [`${knownHosts}`]);
-    exec.exec('cat', [`${sshConfigPath}`]);
+    await exec.exec('ls', ['-la', `${sshDir}`]);
+    await exec.exec('cat', [`${knownHosts}`]);
+    await exec.exec('cat', [`${sshConfigPath}`]);
 
     remoteURL = `git@github.com:${publishRepo}.git`;
     return remoteURL;
