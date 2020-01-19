@@ -46,6 +46,7 @@ export async function setTokens(inps: Inputs): Promise<string> {
       }
     });
     await exec.exec('chmod', ['400', `${idRSA}`]);
+    await exec.exec('eval', ['`ssh-agent`']);
     await exec.exec('ssh-add', [`${idRSA}`]);
 
     const sshConfigPath = path.join(`${sshDir}`, 'config');
