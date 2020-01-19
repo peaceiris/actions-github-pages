@@ -16,8 +16,8 @@ export async function run(): Promise<number> {
 
     await git.setConfig(inps);
 
-    exec.exec('git', ['remote', 'add', 'origin', `${remoteURL}`]);
-    exec.exec('git', ['add', '--all']);
+    await exec.exec('git', ['remote', 'add', 'origin', `${remoteURL}`]);
+    await exec.exec('git', ['add', '--all']);
 
     await git.commit();
     await git.push(inps.PublishBranch);

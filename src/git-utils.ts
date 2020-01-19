@@ -76,7 +76,7 @@ export async function setRepo(inps: Inputs, remoteURL: string): Promise<void> {
     if (inps.KeepFiles) {
       core.info('Keep existing files');
     } else {
-      exec.exec('git', ['rm', '-r', '--ignore-unmatch', '*']);
+      await exec.exec('git', ['rm', '-r', '--ignore-unmatch', '*']);
     }
 
     await copyAssets(inps.PublishDir, workDir);
@@ -94,15 +94,19 @@ export async function setRepo(inps: Inputs, remoteURL: string): Promise<void> {
 
 export async function setConfig(inps: Inputs): Promise<void> {
   if (inps.UserName) {
-    exec.exec('git', ['config', 'user.name', `${inps.UserName}`]);
+    await exec.exec('git', ['config', 'user.name', `${inps.UserName}`]);
   } else {
-    exec.exec('git', ['config', 'user.name', `${process.env.GITHUB_ACTOR}`]);
+    await exec.exec('git', [
+      'config',
+      'user.name',
+      `${process.env.GITHUB_ACTOR}`
+    ]);
   }
 
   if (inps.UserName) {
-    exec.exec('git', ['config', 'user.email', `${inps.UserEmail}`]);
+    await exec.exec('git', ['config', 'user.email', `${inps.UserEmail}`]);
   } else {
-    exec.exec('git', [
+    await exec.exec('git', [
       'config',
       'user.email',
       `${process.env.GITHUB_ACTOR}@users.noreply.github.com`
@@ -116,11 +120,11 @@ export async function commit(): Promise<void> {
   // TODO: inps.ExternalRepository
   // TODO: inps.AllowEmptyCommit
 
-  exec.exec('git', ['commit', '-m', `deploy: ${process.env.GITHUB_SHA}`]);
+  await exec.exec('git', ['commit', '-m', `deploy: ${process.env.GITHUB_SHA}`]);
 }
 
 export async function push(remoteBranch: string): Promise<void> {
   // TODO: inps.ForceOrphan
 
-  exec.exec('git', ['push', 'origin', `${remoteBranch}`]);
+  await exec.exec('git', ['push', 'origin', `${remoteBranch}`]);
 }
