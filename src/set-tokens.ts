@@ -37,7 +37,7 @@ github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXY
       }
     });
 
-    const idRSA = path.join(`${sshDir}`, 'actions-github-pages');
+    const idRSA = path.join(`${sshDir}`, 'id_rsa');
     fs.writeFile(idRSA, inps.DeployKey, err => {
       if (err) {
         throw err;
@@ -49,9 +49,9 @@ github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXY
 
     const sshConfigPath = path.join(`${sshDir}`, 'config');
     const sshConfigContent = `\
-Host actions-github-pages
+Host github
   HostName github.com
-  IdentityFile ~/.ssh/actions-github-pages
+  IdentityFile ~/.ssh/id_rsa
   User git
   ForwardAgent yes
 `;
