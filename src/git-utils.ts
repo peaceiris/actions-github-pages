@@ -14,7 +14,7 @@ export async function createWorkDir(workDirName: string): Promise<void> {
 
 export async function createBranchForce(branch: string): Promise<void> {
   await exec.exec('git', ['init']);
-  await exec.exec('git', ['checkout', '--orphan', `${branch}`]);
+  await exec.exec('git', ['checkout', '--orphan', branch]);
   return;
 }
 
@@ -45,7 +45,7 @@ export async function setRepo(inps: Inputs, remoteURL: string): Promise<void> {
   if (inps.ForceOrphan) {
     core.info('[INFO] ForceOrphan: true');
     await createWorkDir(workDir);
-    process.chdir(`${workDir}`);
+    process.chdir(workDir);
     await createBranchForce(inps.PublishBranch);
     await copyAssets(publishDir, workDir);
     return;
@@ -69,14 +69,14 @@ export async function setRepo(inps: Inputs, remoteURL: string): Promise<void> {
       '--depth=1',
       '--single-branch',
       '--branch',
-      `${inps.PublishBranch}`,
-      `${remoteURL}`,
-      `${workDir}`
+      inps.PublishBranch,
+      remoteURL,
+      workDir
     ],
     options
   );
 
-  process.chdir(`${workDir}`);
+  process.chdir(workDir);
 
   if (result.exitcode === 0) {
     if (inps.KeepFiles) {
@@ -139,5 +139,5 @@ export async function commit(): Promise<void> {
 export async function push(remoteBranch: string): Promise<void> {
   // TODO: inps.ForceOrphan
 
-  await exec.exec('git', ['push', 'origin', `${remoteBranch}`]);
+  await exec.exec('git', ['push', 'origin', remoteBranch]);
 }
