@@ -99,27 +99,23 @@ export async function setRepo(inps: Inputs, remoteURL: string): Promise<void> {
 }
 
 export async function setConfig(inps: Inputs): Promise<void> {
-  await exec.exec('git', ['config', 'gc.auto', '0']);
+  await exec.exec('git', ['config', '--global', 'gc.auto', '0']);
 
+  let actor = '';
   if (inps.UserName) {
-    await exec.exec('git', ['config', 'user.name', `${inps.UserName}`]);
+    actor = inps.UserName;
   } else {
-    await exec.exec('git', [
-      'config',
-      'user.name',
-      `${process.env.GITHUB_ACTOR}`
-    ]);
+    actor = `${process.env.GITHUB_ACTOR}`;
   }
+  await exec.exec('git', ['config', '--global', 'user.name', actor]);
 
+  let email = '';
   if (inps.UserName) {
-    await exec.exec('git', ['config', 'user.email', `${inps.UserEmail}`]);
+    email = inps.UserEmail;
   } else {
-    await exec.exec('git', [
-      'config',
-      'user.email',
-      `${process.env.GITHUB_ACTOR}@users.noreply.github.com`
-    ]);
+    email = `${process.env.GITHUB_ACTOR}@users.noreply.github.com`;
   }
+  await exec.exec('git', ['config', '--global', 'user.email', email]);
 
   return;
 }
