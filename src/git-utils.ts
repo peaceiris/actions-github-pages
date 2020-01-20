@@ -99,6 +99,8 @@ export async function setRepo(inps: Inputs, remoteURL: string): Promise<void> {
 }
 
 export async function setConfig(inps: Inputs): Promise<void> {
+  await exec.exec('git', ['config', 'gc.auto', '0']);
+
   if (inps.UserName) {
     await exec.exec('git', ['config', 'user.name', `${inps.UserName}`]);
   } else {

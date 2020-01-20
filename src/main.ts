@@ -9,12 +9,12 @@ export async function run(): Promise<number> {
   try {
     const inps: Inputs = getInputs();
 
+    await git.setConfig(inps);
+
     const remoteURL = await setTokens(inps);
     core.info(`[INFO] remoteURL: ${remoteURL}`); // TODO: remove
 
     await git.setRepo(inps, remoteURL);
-
-    await git.setConfig(inps);
 
     await exec.exec('git', ['remote', 'rm', 'origin']);
     await exec.exec('git', ['remote', 'add', 'origin', `${remoteURL}`]);
