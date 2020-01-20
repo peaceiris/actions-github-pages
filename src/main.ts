@@ -17,7 +17,7 @@ export async function run(): Promise<number> {
     await git.setRepo(inps, remoteURL);
 
     await exec.exec('git', ['remote', 'rm', 'origin']);
-    await exec.exec('git', ['remote', 'add', 'origin', `${remoteURL}`]);
+    await exec.exec('git', ['remote', 'add', 'origin', remoteURL]);
     await exec.exec('git', ['add', '--all']);
 
     await git.commit();
