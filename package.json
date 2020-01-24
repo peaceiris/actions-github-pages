@@ -47,27 +47,27 @@
   },
   "homepage": "https://github.com/peaceiris/actions-gh-pages#readme",
   "dependencies": {
-    "@actions/core": "^1.2.1",
+    "@actions/core": "^1.2.2",
     "@actions/exec": "^1.0.3",
-    "@actions/github": "^2.0.1",
+    "@actions/github": "^2.1.0",
     "@actions/glob": "^0.1.0",
     "@actions/io": "^1.0.2"
   },
   "devDependencies": {
-    "@types/jest": "^24.9.0",
-    "@types/node": "^13.1.8",
+    "@types/jest": "^24.9.1",
+    "@types/node": "^13.5.0",
     "@typescript-eslint/eslint-plugin": "^2.17.0",
     "@typescript-eslint/parser": "^2.17.0",
     "@zeit/ncc": "^0.21.0",
     "eslint": "^6.8.0",
     "eslint-plugin-jest": "^23.6.0",
-    "husky": "^4.0.10",
-    "jest": "^24.9.0",
-    "jest-circus": "^24.9.0",
-    "lint-staged": "^10.0.0",
+    "husky": "^4.2.1",
+    "jest": "^25.1.0",
+    "jest-circus": "^25.1.0",
+    "lint-staged": "^10.0.2",
     "prettier": "1.19.1",
-    "standard-version": "^7.0.1",
-    "ts-jest": "^24.3.0",
+    "standard-version": "^7.1.0",
+    "ts-jest": "^25.0.0",
     "typescript": "^3.7.5"
   }
 }
