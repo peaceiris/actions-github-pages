@@ -24,8 +24,7 @@
   "lint-staged": {
     "src/**/*.ts": [
       "prettier --check",
-      "eslint",
-      "jest --bail --findRelatedTests --detectOpenHandles"
+      "eslint"
     ]
   },
   "repository": {
