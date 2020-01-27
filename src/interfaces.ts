@@ -18,5 +18,5 @@ export interface Inputs {
 
 export interface CmdResult {
   readonly exitcode: number;
-  readonly output: string;
+  output: string;
 }
