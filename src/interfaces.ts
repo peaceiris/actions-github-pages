@@ -1,22 +1,22 @@
 export interface Inputs {
-  DeployKey: string;
-  GithubToken: string;
-  PersonalToken: string;
-  PublishBranch: string;
-  PublishDir: string;
-  ExternalRepository: string;
-  AllowEmptyCommit: boolean;
-  KeepFiles: boolean;
-  ForceOrphan: boolean;
-  UserName: string;
-  UserEmail: string;
-  CommitMessage: string;
-  TagName: string;
-  TagMessage: string;
-  TagOverwrite: boolean;
+  readonly DeployKey: string;
+  readonly GithubToken: string;
+  readonly PersonalToken: string;
+  readonly PublishBranch: string;
+  readonly PublishDir: string;
+  readonly ExternalRepository: string;
+  readonly AllowEmptyCommit: boolean;
+  readonly KeepFiles: boolean;
+  readonly ForceOrphan: boolean;
+  readonly UserName: string;
+  readonly UserEmail: string;
+  readonly CommitMessage: string;
+  readonly TagName: string;
+  readonly TagMessage: string;
+  readonly TagOverwrite: boolean;
 }
 
 export interface CmdResult {
-  exitcode: number;
-  output: string;
+  readonly exitcode: number;
+  readonly output: string;
 }
