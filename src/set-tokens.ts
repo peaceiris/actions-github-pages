@@ -70,6 +70,7 @@ Host github
     core.warning(
       'GITHUB_TOKEN does not support to trigger the GitHub Pages build event on a public repository.'
     );
+    core.debug(JSON.stringify(github.context.payload));
     if (inps.ExternalRepository) {
       core.error(
         'GITHUB_TOKEN does not support to push to an external repository'
