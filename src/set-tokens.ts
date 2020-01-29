@@ -4,14 +4,7 @@ import * as github from '@actions/github';
 import * as io from '@actions/io';
 import path from 'path';
 import fs from 'fs';
-import {Inputs} from './interfaces';
-
-// export interface GitHubContextJson {
-//   ref: string;
-//   repository: {
-//     private: string;
-//   };
-// }
+import {Inputs, GitHubContext} from './interfaces';
 
 export function setPublishRepo(insp: Inputs): string {
   if (insp.ExternalRepository) {
@@ -77,8 +70,11 @@ Host github
     core.info(
       'GITHUB_TOKEN does not support to trigger the GitHub Pages build event on a public repository.'
     );
-    const context = JSON.stringify(github.context);
-    core.debug(context);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const context: GitHubContext = JSON.stringify(github.context) as any;
+    core.debug(`ref: ${context.ref}`);
+    core.debug(`eventName: ${context.eventName}`);
+    core.debug(`private: ${context.payload.repository.private}`);
     // const json: GitHubContextJson = JSON.stringify(github.context);
     // const isProhibitedBranch = ref.includes(inps.PublishBranch);
     // const isPrivateRepository = JSON.stringify(github.context.payload.repository.private);
