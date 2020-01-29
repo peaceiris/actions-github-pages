@@ -20,15 +20,3 @@ export interface CmdResult {
   exitcode: number;
   output: string;
 }
-
-export interface GitHubContext {
-  payload: {
-    repository: {
-      private: string;
-    };
-  };
-  eventName: string;
-  sha: string;
-  ref: string;
-  actor: string;
-}
