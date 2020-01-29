@@ -2,6 +2,54 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [3.1.0-2](https://github.com/peaceiris/actions-gh-pages/compare/v3.1.0-1...v3.1.0-2) (2020-01-29)
+
+
+### chore
+
+* Change update_schedule from weekly to daily ([705453e](https://github.com/peaceiris/actions-gh-pages/commit/705453ed379218c67346fb7a506672399fa2168c))
+* fix .gitconfig path ([b4f3632](https://github.com/peaceiris/actions-gh-pages/commit/b4f363240e949127f3303265cd8c9d4b93659edf))
+* ignore failure ([752186a](https://github.com/peaceiris/actions-gh-pages/commit/752186ab23060558eec454cca240c52dc0297626))
+* remove jest from lint-staged ([67b2175](https://github.com/peaceiris/actions-gh-pages/commit/67b2175154855954c45d229c3c24df74a7069f8c))
+* update name ([5524237](https://github.com/peaceiris/actions-gh-pages/commit/55242376750e5aa63d6b37c2f1ede2f4574cdff1))
+* update name ([8894b54](https://github.com/peaceiris/actions-gh-pages/commit/8894b541cf0ba48e94b0243c087c2ff6a5acded0))
+
+### ci
+
+* update [skip ci] ([1356241](https://github.com/peaceiris/actions-gh-pages/commit/1356241728f741769f594e16afb333cda1b5af3d))
+
+### deps
+
+* bump @types/jest from 24.9.1 to 25.1.0 (#8) ([a129668](https://github.com/peaceiris/actions-gh-pages/commit/a129668d5a9918c74c0fc61a7b23d650134b9d14)), closes [#8](https://github.com/peaceiris/actions-gh-pages/issues/8)
+* bump @typescript-eslint/eslint-plugin from 2.17.0 to 2.18.0 (#11) ([aeac583](https://github.com/peaceiris/actions-gh-pages/commit/aeac583956c2d4905809b6586dc0587dfd39770d)), closes [#11](https://github.com/peaceiris/actions-gh-pages/issues/11)
+* bump @typescript-eslint/parser from 2.17.0 to 2.18.0 (#9) ([6304225](https://github.com/peaceiris/actions-gh-pages/commit/6304225bde576cdf74f51c252500092fc3c76c30)), closes [#9](https://github.com/peaceiris/actions-gh-pages/issues/9)
+* bump lint-staged from 10.0.2 to 10.0.3 (#10) ([fd432ae](https://github.com/peaceiris/actions-gh-pages/commit/fd432aed6ca65dc463e7a260a4d646a04aac68d8)), closes [#10](https://github.com/peaceiris/actions-gh-pages/issues/10)
+* update ([ff7a4e6](https://github.com/peaceiris/actions-gh-pages/commit/ff7a4e686ef1fe7d116a19ba0e19fe663469636c))
+* update ([b7effe0](https://github.com/peaceiris/actions-gh-pages/commit/b7effe0abf1b31a36b83c045f94a3791e02794dd))
+* update ([b9c97f9](https://github.com/peaceiris/actions-gh-pages/commit/b9c97f9966632cd170952b776cdee0adb5cb3f14))
+
+### feat
+
+* Add git config gc.auto 0 ([f9abca9](https://github.com/peaceiris/actions-gh-pages/commit/f9abca9aadadb1054f154d339787f6b931aca308))
+
+### fix
+
+* git config ([d0589ad](https://github.com/peaceiris/actions-gh-pages/commit/d0589ad8c164019045661a2d3f8298637bf4c38b))
+* remove readonly ([ee2570d](https://github.com/peaceiris/actions-gh-pages/commit/ee2570d0b58bf3a538a419422502044a4823965a))
+* remove readonly ([01fba98](https://github.com/peaceiris/actions-gh-pages/commit/01fba9884211afc67d08805d18a3b5cd21283c3f))
+* string ([edb9ee4](https://github.com/peaceiris/actions-gh-pages/commit/edb9ee4c963e6b7437c6dde39d392af68e205748))
+* string ([b6270ce](https://github.com/peaceiris/actions-gh-pages/commit/b6270cec5adc6c91a5e7a9b716a34d176d68cd2d))
+
+### refactor
+
+* Add readonly ([6b1fffd](https://github.com/peaceiris/actions-gh-pages/commit/6b1fffd0be9f9218319f3973a93a1af0b51e85cd))
+
+### test
+
+* 3 ([2b76677](https://github.com/peaceiris/actions-gh-pages/commit/2b766776185f09bfd9ad34f4bfb07f6526a1f172))
+
+
+
 # [3.1.0-1](https://github.com/peaceiris/actions-gh-pages/compare/v3.1.0-0...v3.1.0-1) (2020-01-19)
 
 
