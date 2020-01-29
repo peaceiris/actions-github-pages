@@ -67,10 +67,11 @@ Host github
     return remoteURL;
   } else if (inps.GithubToken) {
     core.info('[INFO] setup GITHUB_TOKEN');
-    core.warning(
+    core.info(
       'GITHUB_TOKEN does not support to trigger the GitHub Pages build event on a public repository.'
     );
-    core.debug(JSON.stringify(github.context.payload));
+    const ref = JSON.stringify(github.context.payload.ref);
+    core.debug(ref);
     if (inps.ExternalRepository) {
       core.error(
         'GITHUB_TOKEN does not support to push to an external repository'
