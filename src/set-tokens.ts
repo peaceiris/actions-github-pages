@@ -71,7 +71,7 @@ Host github
       'GITHUB_TOKEN does not support to trigger the GitHub Pages build event on a public repository.'
     );
     const ref = JSON.stringify(github.context.payload.ref);
-    core.debug(ref);
+    core.debug(`same: ${ref.includes(inps.PublishBranch)}`);
     if (inps.ExternalRepository) {
       core.error(
         'GITHUB_TOKEN does not support to push to an external repository'
