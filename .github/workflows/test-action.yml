@@ -50,6 +50,7 @@ jobs:
         with:
           # deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: master
           publish_dir: ./test_projects/mdbook/book
 
       # - name: Deploy v2
