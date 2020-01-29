@@ -6,6 +6,13 @@ import path from 'path';
 import fs from 'fs';
 import {Inputs} from './interfaces';
 
+// export interface GitHubContextJson {
+//   ref: string;
+//   repository: {
+//     private: string;
+//   };
+// }
+
 export function setPublishRepo(insp: Inputs): string {
   if (insp.ExternalRepository) {
     return insp.ExternalRepository;
@@ -70,13 +77,18 @@ Host github
     core.info(
       'GITHUB_TOKEN does not support to trigger the GitHub Pages build event on a public repository.'
     );
-    const ref = JSON.stringify(github.context.payload.ref);
-    core.debug(`same: ${ref.includes(inps.PublishBranch)}`);
+    const context = JSON.stringify(github.context);
+    core.debug(context);
+    // const json: GitHubContextJson = JSON.stringify(github.context);
+    // const isProhibitedBranch = ref.includes(inps.PublishBranch);
+    // const isPrivateRepository = JSON.stringify(github.context.payload.repository.private);
     if (inps.ExternalRepository) {
       core.error(
         'GITHUB_TOKEN does not support to push to an external repository'
       );
-    }
+    } // else if (isProhibitedBranch) {
+    // throw new Error(`deploying to ${inps.PublishBranch} branch is prohibited`);
+    // }
     remoteURL = `https://x-access-token:${inps.GithubToken}@github.com/${publishRepo}.git`;
     return remoteURL;
   } else if (inps.PersonalToken) {
