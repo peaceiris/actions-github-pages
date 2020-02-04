@@ -25,7 +25,7 @@ function showInputs(inps: Inputs): void {
 
 export function getInputs(): Inputs {
   const inps: Inputs = {
-    DeployKey: core.getInput('deploy_key').trim(),
+    DeployKey: core.getInput('deploy_key'),
     GithubToken: core.getInput('github_token'),
     PersonalToken: core.getInput('personal_token'),
     PublishBranch: core.getInput('publish_branch'),
