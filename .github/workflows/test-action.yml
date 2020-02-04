@@ -58,6 +58,7 @@ jobs:
           # github_token: ${{ secrets.GITHUB_TOKEN }}
           # publish_branch: master
           publish_dir: ./test_projects/mdbook/book
+          force_orphan: true
 
       # - name: Deploy v2
       #   uses: peaceiris/actions-gh-pages@v2

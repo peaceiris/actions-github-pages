@@ -42,8 +42,8 @@ export async function setRepo(inps: Inputs, remoteURL: string): Promise<void> {
     inps.PublishDir
   );
 
+  core.info(`[INFO] ForceOrphan: ${inps.ForceOrphan}`);
   if (inps.ForceOrphan) {
-    core.info('[INFO] ForceOrphan: true');
     await createWorkDir(workDir);
     process.chdir(workDir);
     await createBranchForce(inps.PublishBranch);
@@ -136,8 +136,10 @@ export async function commit(): Promise<void> {
   }
 }
 
-export async function push(remoteBranch: string): Promise<void> {
-  // TODO: inps.ForceOrphan
-
-  await exec.exec('git', ['push', 'origin', remoteBranch]);
+export async function push(inps: Inputs): Promise<void> {
+  if (inps.ForceOrphan) {
+    await exec.exec('git', ['push', 'origin', '--force', inps.PublishBranch]);
+  } else {
+    await exec.exec('git', ['push', 'origin', inps.PublishBranch]);
+  }
 }
