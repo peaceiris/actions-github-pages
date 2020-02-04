@@ -27,6 +27,6 @@ export async function run(): Promise<void> {
 
     return;
   } catch (e) {
-    return e;
+    throw new Error(e);
   }
 }

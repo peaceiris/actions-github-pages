@@ -124,6 +124,6 @@ export async function setTokens(inps: Inputs): Promise<string> {
       throw new Error('not found deploy key or tokens');
     }
   } catch (e) {
-    return e;
+    throw new Error(e);
   }
 }
