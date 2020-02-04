@@ -4,9 +4,7 @@ import * as github from '@actions/github';
 import * as io from '@actions/io';
 import path from 'path';
 import fs from 'fs';
-// import util from 'util';
 const cpexec = require('child_process').execFileSync;
-// const childProcessExec = util.promisify(cpexec);
 import {Inputs} from './interfaces';
 
 export function setPublishRepo(insp: Inputs): string {
