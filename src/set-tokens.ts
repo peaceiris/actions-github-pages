@@ -62,8 +62,7 @@ User git
   });
   await exec.exec('chmod', ['400', sshConfigPath]);
 
-  const remoteURL = `git@github.com:${publishRepo}.git`;
-  return remoteURL;
+  return `git@github.com:${publishRepo}.git`;
 }
 
 export async function setGithubToken(
@@ -104,22 +103,26 @@ export async function setGithubToken(
     );
   }
 
-  const remoteURL = `https://x-access-token:${inps.GithubToken}@github.com/${publishRepo}.git`;
-  return remoteURL;
+  return `https://x-access-token:${inps.GithubToken}@github.com/${publishRepo}.git`;
+}
+
+export async function setPersonalToken(
+  inps: Inputs,
+  publishRepo: string
+): Promise<string> {
+  core.info('[INFO] setup personal access token');
+  return `https://x-access-token:${inps.PersonalToken}@github.com/${publishRepo}.git`;
 }
 
 export async function setTokens(inps: Inputs): Promise<string> {
   try {
     const publishRepo = setPublishRepo(inps);
-    let remoteURL = '';
     if (inps.DeployKey) {
       return setSSHKey(inps, publishRepo);
     } else if (inps.GithubToken) {
       return setGithubToken(inps, publishRepo);
     } else if (inps.PersonalToken) {
-      core.info('[INFO] setup personal access token');
-      remoteURL = `https://x-access-token:${inps.PersonalToken}@github.com/${publishRepo}.git`;
-      return remoteURL;
+      return setPersonalToken(inps, publishRepo);
     } else {
       throw new Error('not found deploy key or tokens');
     }
