@@ -4,6 +4,7 @@ import * as github from '@actions/github';
 import * as io from '@actions/io';
 import path from 'path';
 import fs from 'fs';
+import childProcess from 'child_process';
 import {Inputs} from './interfaces';
 
 export function setPublishRepo(insp: Inputs): string {
@@ -45,7 +46,7 @@ github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXY
     }
   });
   await exec.exec('chmod', ['400', idRSA]);
-  await exec.exec('eval `ssh-agent`');
+  childProcess.execSync('eval `ssh-agent`');
   await exec.exec('ssh-add', [idRSA]);
 
   const sshConfigPath = path.join(sshDir, 'config');
