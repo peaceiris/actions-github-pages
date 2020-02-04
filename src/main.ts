@@ -30,7 +30,7 @@ export async function run(): Promise<void> {
       inps.CommitMessage
     );
     await git.push(inps.PublishBranch, inps.ForceOrphan);
-
+    await git.pushTag(inps.TagName, inps.TagMessage);
     core.info('[INFO] successfully deployed');
 
     return;

@@ -164,3 +164,22 @@ export async function push(
     await exec.exec('git', ['push', 'origin', branch]);
   }
 }
+
+export async function pushTag(
+  tagName: string,
+  tagMessage: string
+): Promise<void> {
+  if (tagName === '') {
+    return;
+  }
+
+  let msg = '';
+  if (tagMessage) {
+    msg = tagMessage;
+  } else {
+    msg = `Deployment ${tagName}`;
+  }
+
+  await exec.exec('git', ['tag', '-a', `${tagName}`, '-m', `${msg}`]);
+  await exec.exec('git', ['push', 'origin', `${tagName}`]);
+}

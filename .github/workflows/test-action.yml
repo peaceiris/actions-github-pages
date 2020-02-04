@@ -10,6 +10,8 @@ on:
       - synchronize
     paths-ignore:
       - '**.md'
+  tags:
+    - 'v*.*.*'
 
 jobs:
   skipci:
@@ -73,8 +75,8 @@ jobs:
           # user_name: iris
           # user_email: email@peaceiris.com
           commit_message: ${{ github.event.head_commit.message }}
-          # tag_name: ${{ steps.prepare_tag.outputs.deploy_tag_name }}
-          # tag_message: 'Deployment ${{ steps.prepare_tag.outputs.tag_name }}'
+          tag_name: ${{ steps.prepare_tag.outputs.deploy_tag_name }}
+          tag_message: 'Deployment ${{ steps.prepare_tag.outputs.tag_name }}'
 
       # - name: Deploy v2
       #   uses: peaceiris/actions-gh-pages@v2
