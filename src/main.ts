@@ -9,7 +9,7 @@ export async function run(): Promise<void> {
   try {
     const inps: Inputs = getInputs();
 
-    await git.setConfig(inps);
+    await git.setConfig(inps.UserName, inps.UserEmail);
 
     const remoteURL = await setTokens(inps);
     core.info(`[INFO] remoteURL: ${remoteURL}`); // TODO: remove
