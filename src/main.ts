@@ -24,8 +24,8 @@ export async function run(): Promise<void> {
     await exec.exec('git', ['remote', 'add', 'origin', remoteURL]);
     await exec.exec('git', ['add', '--all']);
 
-    await git.commit();
-    await git.push(inps);
+    await git.commit(inps.AllowEmptyCommit);
+    await git.push(inps.PublishBranch, inps.ForceOrphan);
 
     core.info('[INFO] successfully deployed');
 

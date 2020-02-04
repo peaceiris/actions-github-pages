@@ -120,26 +120,36 @@ export async function setConfig(inps: Inputs): Promise<void> {
   return;
 }
 
-export async function commit(): Promise<void> {
+export async function commit(allowEmptyCommit: boolean): Promise<void> {
   // TODO: inps.ExternalRepository
-  // TODO: inps.AllowEmptyCommit
-
   try {
-    await exec.exec('git', [
-      'commit',
-      '-m',
-      `deploy: ${process.env.GITHUB_SHA}`
-    ]);
+    if (allowEmptyCommit) {
+      await exec.exec('git', [
+        'commit',
+        '--allow-empty',
+        '-m',
+        `deploy: ${process.env.GITHUB_SHA}`
+      ]);
+    } else {
+      await exec.exec('git', [
+        'commit',
+        '-m',
+        `deploy: ${process.env.GITHUB_SHA}`
+      ]);
+    }
   } catch (e) {
     core.info('[INFO] skip commit');
     core.debug(`[INFO] skip commit ${e}`);
   }
 }
 
-export async function push(inps: Inputs): Promise<void> {
-  if (inps.ForceOrphan) {
-    await exec.exec('git', ['push', 'origin', '--force', inps.PublishBranch]);
+export async function push(
+  branch: string,
+  forceOrphan: boolean
+): Promise<void> {
+  if (forceOrphan) {
+    await exec.exec('git', ['push', 'origin', '--force', branch]);
   } else {
-    await exec.exec('git', ['push', 'origin', inps.PublishBranch]);
+    await exec.exec('git', ['push', 'origin', branch]);
   }
 }
