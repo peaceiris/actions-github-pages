@@ -13,6 +13,48 @@ export function setPublishRepo(insp: Inputs): string {
   return `${github.context.repo.owner}/${github.context.repo.repo}`;
 }
 
+export async function setGithubToken(
+  inps: Inputs,
+  publishRepo: string
+): Promise<string> {
+  core.info('[INFO] setup GITHUB_TOKEN');
+
+  const context = github.context;
+  const payload = github.context.payload;
+  core.debug(`ref: ${context.ref}`);
+  core.debug(`eventName: ${context.eventName}`);
+  core.debug(`private: ${payload.repository?.private}`);
+  let isProhibitedBranch = false;
+
+  const ref = context.ref;
+  if (context.eventName === 'push') {
+    isProhibitedBranch = ref.includes(`refs/heads/${inps.PublishBranch}`);
+    if (isProhibitedBranch) {
+      throw new Error(
+        `You deploy from ${inps.PublishBranch} to ${inps.PublishBranch}`
+      );
+    }
+  } else if (context.eventName === 'pull_request') {
+    // TODO: support pull_request event
+    throw new Error('This action does not support pull_request event now.');
+  }
+
+  const isPrivateRepository = payload.repository?.private;
+  if (inps.ExternalRepository) {
+    throw new Error(
+      'GITHUB_TOKEN does not support to push to an external repository'
+    );
+  }
+  if (isPrivateRepository === false) {
+    core.warning(
+      'GITHUB_TOKEN does not support to trigger the GitHub Pages build event on a public repository'
+    );
+  }
+
+  const remoteURL = `https://x-access-token:${inps.GithubToken}@github.com/${publishRepo}.git`;
+  return remoteURL;
+}
+
 export async function setTokens(inps: Inputs): Promise<string> {
   const publishRepo = setPublishRepo(inps);
   let remoteURL = '';
@@ -66,27 +108,7 @@ Host github
     remoteURL = `git@github.com:${publishRepo}.git`;
     return remoteURL;
   } else if (inps.GithubToken) {
-    core.info('[INFO] setup GITHUB_TOKEN');
-    core.info(
-      'GITHUB_TOKEN does not support to trigger the GitHub Pages build event on a public repository.'
-    );
-    const context = github.context;
-    const payload = github.context.payload;
-    core.debug(`ref: ${context.ref}`);
-    core.debug(`eventName: ${context.eventName}`);
-    core.debug(`private: ${payload.repository?.private}`);
-    // const json: GitHubContextJson = JSON.stringify(github.context);
-    // const isProhibitedBranch = ref.includes(inps.PublishBranch);
-    // const isPrivateRepository = JSON.stringify(github.context.payload.repository.private);
-    if (inps.ExternalRepository) {
-      core.error(
-        'GITHUB_TOKEN does not support to push to an external repository'
-      );
-    } // else if (isProhibitedBranch) {
-    // throw new Error(`deploying to ${inps.PublishBranch} branch is prohibited`);
-    // }
-    remoteURL = `https://x-access-token:${inps.GithubToken}@github.com/${publishRepo}.git`;
-    return remoteURL;
+    return setGithubToken(inps, publishRepo);
   } else if (inps.PersonalToken) {
     core.info('[INFO] setup personal access token');
     remoteURL = `https://x-access-token:${inps.PersonalToken}@github.com/${publishRepo}.git`;
