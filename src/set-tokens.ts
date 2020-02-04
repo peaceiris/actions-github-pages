@@ -37,7 +37,7 @@ github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXY
     }
   });
 
-  const idRSA = path.join(sshDir, 'id_rsa');
+  const idRSA = path.join(sshDir, 'github');
   fs.writeFile(idRSA, inps.DeployKey, err => {
     if (err) {
       throw err;
@@ -54,7 +54,7 @@ github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXY
   const sshConfigContent = `\
 Host github
     HostName github.com
-    IdentityFile ~/.ssh/id_rsa
+    IdentityFile ~/.ssh/github
     User git
 `;
   fs.writeFile(sshConfigPath, sshConfigContent, err => {
