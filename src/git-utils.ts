@@ -123,22 +123,30 @@ export async function setConfig(
   return;
 }
 
-export async function commit(allowEmptyCommit: boolean): Promise<void> {
-  // TODO: inps.ExternalRepository
+export async function commit(
+  allowEmptyCommit: boolean,
+  externalRepository: string,
+  message: string
+): Promise<void> {
+  let msg = '';
+  if (message) {
+    msg = message;
+  } else {
+    msg = 'deploy:';
+  }
+
+  const hash = `${process.env.GITHUB_SHA}`;
+  if (externalRepository) {
+    msg = `${msg} ${externalRepository}@${hash}`;
+  } else {
+    msg = `${msg} ${hash}`;
+  }
+
   try {
     if (allowEmptyCommit) {
-      await exec.exec('git', [
-        'commit',
-        '--allow-empty',
-        '-m',
-        `deploy: ${process.env.GITHUB_SHA}`
-      ]);
+      await exec.exec('git', ['commit', '--allow-empty', '-m', `${msg}`]);
     } else {
-      await exec.exec('git', [
-        'commit',
-        '-m',
-        `deploy: ${process.env.GITHUB_SHA}`
-      ]);
+      await exec.exec('git', ['commit', '-m', `${msg}`]);
     }
   } catch (e) {
     core.info('[INFO] skip commit');
