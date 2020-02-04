@@ -1,5 +1,6 @@
 import * as core from '@actions/core';
 import * as exec from '@actions/exec';
+import * as github from '@actions/github';
 import * as io from '@actions/io';
 import * as glob from '@actions/glob';
 import path from 'path';
@@ -136,8 +137,9 @@ export async function commit(
   }
 
   const hash = `${process.env.GITHUB_SHA}`;
+  const baseRepo = `${github.context.repo.owner}/${github.context.repo.repo}`;
   if (externalRepository) {
-    msg = `${msg} ${externalRepository}@${hash}`;
+    msg = `${msg} ${baseRepo}@${hash}`;
   } else {
     msg = `${msg} ${hash}`;
   }
