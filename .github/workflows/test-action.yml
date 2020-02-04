@@ -4,14 +4,14 @@ on:
   push:
     branches:
       - master
+    tags:
+      - 'v*.*.*'
   pull_request:
     types:
       - opened
       - synchronize
     paths-ignore:
       - '**.md'
-  tags:
-    - 'v*.*.*'
 
 jobs:
   skipci:
