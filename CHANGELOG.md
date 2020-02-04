@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.3](https://github.com/peaceiris/actions-gh-pages/compare/v3.1.2...v3.1.3) (2020-02-04)
+
+
+### fix
+
+* add await ([8f3dfcb](https://github.com/peaceiris/actions-gh-pages/commit/8f3dfcbfc2b7294aed82f40ce3b8cd277b927a80))
+* add await ([8a3c589](https://github.com/peaceiris/actions-gh-pages/commit/8a3c58984088ea08b176dd81eb35f8bd3895a146))
+* add eval SSH_AUTH_SOCK=/var/folders/kq/plr51cwn7ql9dh5m035_2fsh0000gn/T//ssh-iXC8tDO67Brj/agent.73139; export SSH_AUTH_SOCK; ([06e73f4](https://github.com/peaceiris/actions-gh-pages/commit/06e73f4286867c4fe3e3b8d48b70db1d9d33f608))
+* add sh -c 'eval SSH_AUTH_SOCK=/var/folders/kq/plr51cwn7ql9dh5m035_2fsh0000gn/T//ssh-BEHc8SfUWzKd/agent.74533; export SSH_AUTH_SOCK; ([114d174](https://github.com/peaceiris/actions-gh-pages/commit/114d17483f85fbf60a92972c969cd49d799abe59))
+* add sh -c eval SSH_AUTH_SOCK=/var/folders/kq/plr51cwn7ql9dh5m035_2fsh0000gn/T//ssh-LTfBLKFbp39Z/agent.73455; export SSH_AUTH_SOCK; ([df63091](https://github.com/peaceiris/actions-gh-pages/commit/df630915f2c1a31ee3acb55420294ad5dd1e089e))
+* add SSH_AUTH_SOCK ([fb0c9f1](https://github.com/peaceiris/actions-gh-pages/commit/fb0c9f1ebc41727c6205c50f667e907bbd824888))
+* Add ssh-add ([c19aace](https://github.com/peaceiris/actions-gh-pages/commit/c19aace6828eaccbf0f2516053ad172704608b72))
+* cpexec ([30e98db](https://github.com/peaceiris/actions-gh-pages/commit/30e98dba8efdbd38275f0a7ceb49d6e1449f2dca))
+* cpexec ([63697ad](https://github.com/peaceiris/actions-gh-pages/commit/63697adefcc1762fcb07102a858a895b7e435fca))
+* eval ([d696db2](https://github.com/peaceiris/actions-gh-pages/commit/d696db2c8d77159fcb9ef211abb489c757f3a85e))
+* ssh-agent ([9406f9d](https://github.com/peaceiris/actions-gh-pages/commit/9406f9d108a44c5e0a90b41c5817f84ac9ba7006))
+* ssh-agent ([db62914](https://github.com/peaceiris/actions-gh-pages/commit/db6291436b37e56847cee67374247477113d6c43))
+
+
+
 ## [3.1.2](https://github.com/peaceiris/actions-gh-pages/compare/v3.1.1...v3.1.2) (2020-02-04)
 
 
