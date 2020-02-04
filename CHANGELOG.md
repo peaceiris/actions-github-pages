@@ -2,6 +2,43 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [3.1.0](https://github.com/peaceiris/actions-gh-pages/compare/v3.1.0-2...v3.1.0) (2020-02-04)
+
+
+### chore
+
+* Add engines field ([f27f5d1](https://github.com/peaceiris/actions-gh-pages/commit/f27f5d17579b2cd9497bb90de673e5bf68683db3)), closes [#12](https://github.com/peaceiris/actions-gh-pages/issues/12)
+* Add latest git (#14) ([cba55a7](https://github.com/peaceiris/actions-gh-pages/commit/cba55a7c9634dfaf3fa0f879f28481c775acd022)), closes [#14](https://github.com/peaceiris/actions-gh-pages/issues/14) [#6](https://github.com/peaceiris/actions-gh-pages/issues/6)
+
+### deps
+
+* bump @types/node from 13.5.0 to 13.5.1 (#13) ([0e5e067](https://github.com/peaceiris/actions-gh-pages/commit/0e5e0674725a6f230c077eb3d42ba9cd744f3f33)), closes [#13](https://github.com/peaceiris/actions-gh-pages/issues/13)
+* update ([6b2b219](https://github.com/peaceiris/actions-gh-pages/commit/6b2b21931c7f2d3e6c8bb103d8911c7db5e1640c))
+* update ([825291d](https://github.com/peaceiris/actions-gh-pages/commit/825291d6f44b996e6798a185649148d95c2113a0))
+* update ([5f81e04](https://github.com/peaceiris/actions-gh-pages/commit/5f81e04c5392575d3b7a0e0c19dba9b6e12a1552))
+
+### feat
+
+* Add ForceOrphan ([72a38e1](https://github.com/peaceiris/actions-gh-pages/commit/72a38e1a66d6e92e1f5cc4e6517736302350769b))
+* add tag ([cb0ae4b](https://github.com/peaceiris/actions-gh-pages/commit/cb0ae4b051357b3950eaad0694e5280685d02a65))
+
+### fix
+
+* action failure status (#15) ([5d770cf](https://github.com/peaceiris/actions-gh-pages/commit/5d770cf1a3f624f288aeb883120facd8bb9be0e3)), closes [#15](https://github.com/peaceiris/actions-gh-pages/issues/15)
+* test 5 ([be72615](https://github.com/peaceiris/actions-gh-pages/commit/be726151a04188efc7817a2ea4a2fa6d5aab0f52))
+* test 5 ([0c3cc92](https://github.com/peaceiris/actions-gh-pages/commit/0c3cc9261318d03f93ea9765c80416e02ac22850))
+
+### test
+
+* allowEmptyCommit ([dbe91b4](https://github.com/peaceiris/actions-gh-pages/commit/dbe91b4071cd17ef2e8ed2b15d7aa78ddc2fde31))
+* fail (#17) ([102ec5a](https://github.com/peaceiris/actions-gh-pages/commit/102ec5a6faa411ded6dbd9dad2c9c90760b5f6aa)), closes [#17](https://github.com/peaceiris/actions-gh-pages/issues/17)
+* name email ([4cfb699](https://github.com/peaceiris/actions-gh-pages/commit/4cfb6998408e2f5890ac8edfc2b2e21c6dff7ce3))
+* name email ([699be58](https://github.com/peaceiris/actions-gh-pages/commit/699be586e2a51ecac66b0386d138977d96d0fb22))
+* print context ([1f50fa1](https://github.com/peaceiris/actions-gh-pages/commit/1f50fa14ea101ba129d2df88456efbc8a1f44072))
+* should fail ([b5ee9e2](https://github.com/peaceiris/actions-gh-pages/commit/b5ee9e26f781f5dd14ac31186394d6042a4007c6))
+
+
+
 # [3.1.0-2](https://github.com/peaceiris/actions-gh-pages/compare/v3.1.0-1...v3.1.0-2) (2020-01-29)
 
 
