@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.2](https://github.com/peaceiris/actions-gh-pages/compare/v3.1.1...v3.1.2) (2020-02-04)
+
+
+### fix
+
+* ssh config ([5d7baea](https://github.com/peaceiris/actions-gh-pages/commit/5d7baea212a39da311412fb263b5ae473025d80d))
+
+
+
 ## [3.1.1](https://github.com/peaceiris/actions-gh-pages/compare/v3.1.0...v3.1.1) (2020-02-04)
 
 
