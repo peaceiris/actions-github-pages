@@ -21,7 +21,6 @@ afterEach(() => {
   delete process.env['INPUT_COMMIT_MESSAGE'];
   delete process.env['INPUT_TAG_NAME'];
   delete process.env['INPUT_TAG_MESSAGE'];
-  delete process.env['INPUT_TAG_OVERWRITE'];
 });
 
 describe('getInputs()', () => {
@@ -40,7 +39,6 @@ describe('getInputs()', () => {
     // process.env['INPUT_COMMIT_MESSAGE'] = 'feat: Add new feature';
     // process.env['INPUT_TAG_NAME'] = 'deploy-v1.2.3';
     // process.env['INPUT_TAG_MESSAGE'] = 'Deployment v1.2.3';
-    // process.env['INPUT_TAG_OVERWRITE'] = 'true';
 
     const inps: Inputs = getInputs();
 
@@ -58,7 +56,6 @@ describe('getInputs()', () => {
     expect(inps.CommitMessage).toMatch('');
     expect(inps.TagName).toMatch('');
     expect(inps.TagMessage).toMatch('');
-    expect(inps.TagOverwrite).toBe(false);
   });
 
   test('get spec inputs', () => {
@@ -76,7 +73,6 @@ describe('getInputs()', () => {
     process.env['INPUT_COMMIT_MESSAGE'] = 'feat: Add new feature';
     process.env['INPUT_TAG_NAME'] = 'deploy-v1.2.3';
     process.env['INPUT_TAG_MESSAGE'] = 'Deployment v1.2.3';
-    process.env['INPUT_TAG_OVERWRITE'] = 'true';
 
     const inps: Inputs = getInputs();
 
@@ -94,6 +90,5 @@ describe('getInputs()', () => {
     expect(inps.CommitMessage).toMatch('feat: Add new feature');
     expect(inps.TagName).toMatch('deploy-v1.2.3');
     expect(inps.TagMessage).toMatch('Deployment v1.2.3');
-    expect(inps.TagOverwrite).toBe(true);
   });
 });

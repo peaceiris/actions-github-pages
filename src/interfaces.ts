@@ -13,7 +13,6 @@ export interface Inputs {
   readonly CommitMessage: string;
   readonly TagName: string;
   readonly TagMessage: string;
-  readonly TagOverwrite: boolean;
 }
 
 export interface CmdResult {

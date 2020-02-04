@@ -16,7 +16,11 @@ export async function run(): Promise<void> {
 
     await git.setRepo(inps, remoteURL);
 
-    await exec.exec('git', ['remote', 'rm', 'origin']);
+    try {
+      await exec.exec('git', ['remote', 'rm', 'origin']);
+    } catch (e) {
+      core.info(`[INFO] e`);
+    }
     await exec.exec('git', ['remote', 'add', 'origin', remoteURL]);
     await exec.exec('git', ['add', '--all']);
 

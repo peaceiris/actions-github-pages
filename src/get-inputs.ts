@@ -21,7 +21,6 @@ function showInputs(inps: Inputs): void {
   core.info(`[INFO] CommitMessage: ${inps.CommitMessage}`);
   core.info(`[INFO] TagName: ${inps.TagName}`);
   core.info(`[INFO] TagMessage: ${inps.TagMessage}`);
-  core.info(`[INFO] TagOverwrite: ${inps.TagOverwrite}`);
 }
 
 export function getInputs(): Inputs {
@@ -42,9 +41,7 @@ export function getInputs(): Inputs {
     UserEmail: core.getInput('user_email'),
     CommitMessage: core.getInput('commit_message'),
     TagName: core.getInput('tag_name'),
-    TagMessage: core.getInput('tag_message'),
-    TagOverwrite:
-      (core.getInput('tag_overwrite') || 'false').toUpperCase() === 'TRUE'
+    TagMessage: core.getInput('tag_message')
   };
 
   showInputs(inps);

@@ -55,7 +55,3 @@ inputs:
   tag_message:
     description: 'Set tag message'
     required: false
-  tag_overwrite:
-    description: 'Enable overwriting tag'
-    required: false
-    default: 'false'
