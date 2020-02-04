@@ -49,9 +49,9 @@ github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXY
   const sshConfigPath = path.join(sshDir, 'config');
   const sshConfigContent = `\
 Host github
-HostName github.com
-IdentityFile ~/.ssh/id_rsa
-User git
+    HostName github.com
+    IdentityFile ~/.ssh/id_rsa
+    User git
 `;
   fs.writeFile(sshConfigPath, sshConfigContent, err => {
     if (err) {
