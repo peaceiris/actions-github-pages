@@ -48,7 +48,7 @@ github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXY
     }
   });
   await exec.exec('chmod', ['400', idRSA]);
-  await childProcessExec('eval `ssh-agent`');
+  await childProcessExec('eval "$(ssh-agent)"');
   await exec.exec('ssh-add', [idRSA]);
 
   const sshConfigPath = path.join(sshDir, 'config');
