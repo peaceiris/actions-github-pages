@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.12](https://github.com/peaceiris/actions-gh-pages/compare/v3.1.11...v3.1.12) (2020-02-05)
+
+
+### fix
+
+* add new line, ssh-keyscan comment ([1333ef6](https://github.com/peaceiris/actions-gh-pages/commit/1333ef6f810edd7fd42a56b786be33553dcbb45a))
+
+
+
 ## [3.1.11](https://github.com/peaceiris/actions-gh-pages/compare/v3.1.10...v3.1.11) (2020-02-05)
 
 
