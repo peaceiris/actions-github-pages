@@ -37,9 +37,6 @@ github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXY
   fs.writeFileSync(idRSA, inps.DeployKey);
   core.info(`[INFO] wrote ${idRSA}`);
   await exec.exec('chmod', ['600', idRSA]);
-  await cpexec('ssh-agent', ['-a', '/tmp/ssh-auth.sock']);
-  core.exportVariable('SSH_AUTH_SOCK', '/tmp/ssh-auth.sock');
-  await exec.exec('ssh-add', [idRSA]);
 
   const sshConfigPath = path.join(sshDir, 'config');
   const sshConfigContent = `\
@@ -51,6 +48,10 @@ Host github
   fs.writeFileSync(sshConfigPath, sshConfigContent);
   core.info(`[INFO] wrote ${sshConfigPath}`);
   await exec.exec('chmod', ['600', sshConfigPath]);
+
+  await cpexec('ssh-agent', ['-a', '/tmp/ssh-auth.sock']);
+  core.exportVariable('SSH_AUTH_SOCK', '/tmp/ssh-auth.sock');
+  await exec.exec('ssh-add', [idRSA]);
 
   return `git@github.com:${publishRepo}.git`;
 }
