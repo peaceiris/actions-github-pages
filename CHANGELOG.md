@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.9](https://github.com/peaceiris/actions-gh-pages/compare/v3.1.8...v3.1.9) (2020-02-05)
+
+
+### fix
+
+* Add chmod 600 known_hosts ([24a9ba2](https://github.com/peaceiris/actions-gh-pages/commit/24a9ba28d32d735d348f3c82914ac0f9216a8e12))
+
+
+
 ## [3.1.8](https://github.com/peaceiris/actions-gh-pages/compare/v3.1.7...v3.1.8) (2020-02-04)
 
 
