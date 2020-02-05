@@ -36,6 +36,7 @@ github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXY
       core.info(`[INFO] wrote ${knownHosts}`);
     }
   });
+  await exec.exec('chmod', ['600', knownHosts]);
 
   const idRSA = path.join(sshDir, 'github');
   fs.writeFile(idRSA, inps.DeployKey, err => {
