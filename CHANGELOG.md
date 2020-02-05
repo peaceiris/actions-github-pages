@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.10](https://github.com/peaceiris/actions-gh-pages/compare/v3.1.9...v3.1.10) (2020-02-05)
+
+
+### fix
+
+* change writeFile to writeFileSync ([57d9579](https://github.com/peaceiris/actions-gh-pages/commit/57d9579cc71fe2a71e82a47ce2b7ad990db16406))
+
+
+
 ## [3.1.9](https://github.com/peaceiris/actions-gh-pages/compare/v3.1.8...v3.1.9) (2020-02-05)
 
 
